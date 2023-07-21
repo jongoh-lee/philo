@@ -6,7 +6,7 @@
 /*   By: jongolee <jongolee@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/21 18:59:58 by jongolee          #+#    #+#             */
-/*   Updated: 2023/07/21 19:22:02 by jongolee         ###   ########.fr       */
+/*   Updated: 2023/07/21 21:03:29 by jongolee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,8 @@ enum e_state {
 	THINKING, 
 	EATING, 
 	SLEEPING, 
-	DEAD
+	DEAD,
+	DONE
 };
 
 enum e_error {
@@ -49,4 +50,5 @@ typedef struct s_data
 int	is_input_valid(char *str, int i, int sign);
 int	ft_atoi(const char *str);
 void	on_error(int ERROR_CODE);
+void	print_died(unsigned long sec, unsigned long usec, int id);
 #endif

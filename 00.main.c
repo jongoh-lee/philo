@@ -6,7 +6,7 @@
 /*   By: jongolee <jongolee@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/21 19:00:34 by jongolee          #+#    #+#             */
-/*   Updated: 2023/07/21 20:23:03 by jongolee         ###   ########.fr       */
+/*   Updated: 2023/07/21 21:28:28 by jongolee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,12 +51,10 @@ void	*philo(void *arg)
 	((t_data *)arg)->id++;
 	data = *(t_data *)arg;
 	pthread_mutex_unlock(&((t_data *)arg)->mutex);
-	while (data.state[data.id] != DEAD)
-	{
-		if (check_side())
-	}
-	if (data.eat_counter != data.must_eat)
-		printf("dead\n");
+	// while (data.state[data.id] != DEAD)
+	// {
+	// 	if (check_side());
+	// }
 	return (0);
 }
 
@@ -92,30 +90,27 @@ void	wait_philos(pthread_t *threads, int philos)
 void	kill_philos(t_data data)
 {
 	int				i;
-	int				dead;
+	int				over;
 	struct timeval	tv;
 
 	i = 0;
+	over = 0;
 	while (i < data.philo_num)
 	{
 		gettimeofday(&tv, NULL);
-		if ((tv.tv_sec - data.last_eat_start_sec[i]) * 1000 + (tv.tv_usec - data.last_eat_start_usec[i]) / 1000 >= data.time_to_die)
+		pthread_mutex_lock(&data.mutex);
+		if ((tv.tv_sec - data.last_eat_start_sec[i]) * 1000 + (tv.tv_usec - data.last_eat_start_usec[i]) / 1000 >= data.time_to_die && (data.state[i] != DEAD || data.state[i] != DONE))
 		{
-			pthread_mutex_lock(&data.mutex);
 			data.state[i] = DEAD;
-			pthread_mutex_unlock(&data.mutex);
-			dead(i);
+			print_died(tv.tv_sec, tv.tv_usec, data.id);
+			over++;
 		}
-		if (data.state[i] == DEAD)
-			dead++;
+		pthread_mutex_unlock(&data.mutex);
 		i++;
-		if (dead != PHILOS && i == PHILOS)
-		{
-			i = 0;
-			dead = 0;
-		}
-		else if (dead == PHILOS)
+		if (over == data.philo_num)
 			break ;
+		if (i == data.philo_num)
+			i = 0;
 	}
 }
 
@@ -136,8 +131,9 @@ int main(int ac, char **av)
 	}
 	if (!init(&data, &threads, av))
 		return (0);
+	//만들기
 	make_philos(data, threads);
-	kill_philos(data);
+	// kill_philos(data);
 	wait_philos(threads, data.philo_num);
 	return (0);
 }
