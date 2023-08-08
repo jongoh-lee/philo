@@ -6,7 +6,7 @@
 /*   By: jongolee <jongolee@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/21 18:59:58 by jongolee          #+#    #+#             */
-/*   Updated: 2023/08/08 13:07:19 by jongolee         ###   ########.fr       */
+/*   Updated: 2023/08/08 13:13:42 by jongolee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,8 @@ typedef struct s_data
 	int					full_philo;
 	int					over; > 다 먹거나 한명 죽거나
 	pthread_mutex_t		id_mutex;
+	pthread_mutex_t		fork_mutex;
+	pthread_mutex_t		over_mutex;
 }	t_data;
 
 void	on_error(int ERROR_CODE);
