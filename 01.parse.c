@@ -6,7 +6,7 @@
 /*   By: jongolee <jongolee@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/21 19:01:41 by jongolee          #+#    #+#             */
-/*   Updated: 2023/07/21 19:17:04 by jongolee         ###   ########.fr       */
+/*   Updated: 2023/08/08 03:06:17 by jongolee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ int	is_input_valid(char *str, int i, int sign)
 	return (1);
 }
 
-int	ft_atoi(const char *str)
+int	ft_atoi(char *str)
 {
 	int					i;
 	int					sign;

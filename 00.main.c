@@ -6,7 +6,7 @@
 /*   By: jongolee <jongolee@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/21 19:00:34 by jongolee          #+#    #+#             */
-/*   Updated: 2023/07/21 21:28:28 by jongolee         ###   ########.fr       */
+/*   Updated: 2023/08/08 03:29:00 by jongolee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ int	init(t_data *data, pthread_t **threads, char **av)
 	data->state = malloc(sizeof(int) * data->philo_num);
 	data->last_eat_start_sec = malloc(sizeof(int) * data->philo_num);
 	data->last_eat_start_usec = malloc(sizeof(int) * data->philo_num);
-	*threads = malloc(sizeof(pthread_t *) * data->philo_num);
+	*threads = malloc(sizeof(pthread_t) * data->philo_num);
 	if (!(data->state || data->last_eat_start_sec || data->last_eat_start_usec || *threads))
 		on_error(MALLOC);
 	return (1);
@@ -51,10 +51,7 @@ void	*philo(void *arg)
 	((t_data *)arg)->id++;
 	data = *(t_data *)arg;
 	pthread_mutex_unlock(&((t_data *)arg)->mutex);
-	// while (data.state[data.id] != DEAD)
-	// {
-	// 	if (check_side());
-	// }
+	printf("%d\n", data.id);
 	return (0);
 }
 
@@ -75,7 +72,7 @@ void	make_philos(t_data data, pthread_t *threads)
 	}
 }
 
-void	wait_philos(pthread_t *threads, int philos)
+void	join_philos(pthread_t *threads, int philos)
 {
 	int i;
 
@@ -87,64 +84,60 @@ void	wait_philos(pthread_t *threads, int philos)
 	}
 }
 
-void	kill_philos(t_data data)
-{
-	int				i;
-	int				over;
-	struct timeval	tv;
+// void	kill_philos(t_data data)
+// {
+// 	int				i;
+// 	int				over;
+// 	struct timeval	tv;
+// 	i = 0;
+// 	over = 0;
+// 	while (i < data.philo_num)
+// 	{
+// 		gettimeofday(&tv, NULL);
+// 		pthread_mutex_lock(&data.mutex);
+// 		if ((tv.tv_sec - data.last_eat_start_sec[i]) * 1000 + (tv.tv_usec - data.last_eat_start_usec[i]) / 1000 >= data.time_to_die && (data.state[i] != DEAD || data.state[i] != DONE))
+// 		{
+// 			data.state[i] = DEAD;
+// 			print_died(tv.tv_sec, tv.tv_usec, data.id);
+// 			over++;
+// 		}
+// 		pthread_mutex_unlock(&data.mutex);
+// 		i++;
+// 		if (over == data.philo_num)
+// 			break ;
+// 		if (i == data.philo_num)
+// 			i = 0;
+// 	}
+// }
 
-	i = 0;
-	over = 0;
-	while (i < data.philo_num)
-	{
-		gettimeofday(&tv, NULL);
-		pthread_mutex_lock(&data.mutex);
-		if ((tv.tv_sec - data.last_eat_start_sec[i]) * 1000 + (tv.tv_usec - data.last_eat_start_usec[i]) / 1000 >= data.time_to_die && (data.state[i] != DEAD || data.state[i] != DONE))
-		{
-			data.state[i] = DEAD;
-			print_died(tv.tv_sec, tv.tv_usec, data.id);
-			over++;
-		}
-		pthread_mutex_unlock(&data.mutex);
-		i++;
-		if (over == data.philo_num)
-			break ;
-		if (i == data.philo_num)
-			i = 0;
-	}
+
+void	free_data(t_data data, pthread_t **threads)
+{
+	free(data.state);
+	free(data.last_eat_start_sec);
+	free(data.last_eat_start_usec);
+	free(*threads);
+}
+
+void	hi()
+{
+	system("leaks philo");
 }
 
 int main(int ac, char **av)
 {
+	atexit(hi);
 	pthread_t		*threads;
 	t_data			data;
 
 	if (!(ac == 5 || ac == 6))
-	{
-		perror("1)number_of_philosophers\n\
-		2)time_to_die(ms)\n\
-		3)time_to_eat(ms)\n\
-		4)time_to_sleep(ms)\n\
-		5)[number_of_times_each_philosopher_must_eat]\n\
-		input please");
-		exit(1);
-	}
+		on_error(ARG);
 	if (!init(&data, &threads, av))
 		return (0);
-	//만들기
 	make_philos(data, threads);
-	// kill_philos(data);
-	wait_philos(threads, data.philo_num);
+	monitor_philos(data);
+	join_philos(threads, data.philo_num);
+	free_data(data, &threads);
+	pthread_mutex_destroy(&data.mutex);
 	return (0);
 }
-
-
-// 	//2. 생명 or 다 먹었는지 확인하는 스레드 만들기 > 스레드 내부에서 처리 할 경우 cs시간이 오버되어 사망 후 10ms안에 출력을 못할 수 있음
-// 	i = 0;
-// 	dead_man = 0;
-// 	i = 0;
-// 	while (i < PHILOS)
-// 	{
-// 		pthread_join(thread[i], NULL);
-// 		i++;
-// 	}

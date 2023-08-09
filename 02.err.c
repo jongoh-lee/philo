@@ -6,37 +6,27 @@
 /*   By: jongolee <jongolee@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/21 19:02:51 by jongolee          #+#    #+#             */
-/*   Updated: 2023/07/21 19:18:38 by jongolee         ###   ########.fr       */
+/*   Updated: 2023/08/08 02:44:10 by jongolee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "./main.h"
 
-void	ft_putchar_fd(char c, int fd)
-{
-	if (fd < 0)
-		return ;
-	write(fd, &c, 1);
-}
-
-void	ft_putendl_fd(char *s, int fd)
-{
-	if (fd < 0)
-		return ;
-	if (!s)
-		return ;
-	while (*s)
-	{
-		ft_putchar_fd(*s, fd);
-		s++;
-	}
-}
-
 void	on_error(int ERROR_CODE)
 {
 	if (ERROR_CODE == MALLOC)
-		ft_putendl_fd("Error\nmalloc failed\n", 2);
+		printf("Error\nmalloc failed\n");
 	else if (ERROR_CODE == INPUT)
-		ft_putendl_fd("Error\ninput in valid\n", 2);
+		printf("Error\ninput in valid\n");
+	else if (ERROR_CODE == ARG)
+	{
+		printf(
+		"[argument format] 1 2 3 4 [5]\n"
+		"1)number_of_philosophers\n"
+		"2)time_to_die(ms)\n"
+		"3)time_to_eat(ms)\n"
+		"4)time_to_sleep(ms)\n"
+		"[5]number_of_times_each_philosopher_must_eat\n");	
+	}
 	exit(EXIT_FAILURE);
 }
