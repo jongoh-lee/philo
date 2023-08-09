@@ -6,7 +6,7 @@
 /*   By: jongohlee <jongohlee@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/21 18:59:58 by jongolee          #+#    #+#             */
-/*   Updated: 2023/08/09 14:25:54 by jongohlee        ###   ########.fr       */
+/*   Updated: 2023/08/10 02:38:28 by jongohlee        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,18 +18,17 @@
 # include <unistd.h>
 # include <stdlib.h>
 
-enum e_state {
-	THINKING, 
-	EATING, 
-	SLEEPING, 
-	DEAD,
-	DONE
-};
-
 enum e_error {
 	MALLOC,
 	INPUT,
 	ARG
+};
+
+enum e_log {
+	FORK,
+	EATING,
+	SLEEPING,
+	THINKING
 };
 
 typedef struct s_data
@@ -40,19 +39,20 @@ typedef struct s_data
 	int					time_to_die;
 	int					eating_time;
 	int					sleeping_time;
-	int					eat_count;
+	int					*eat_count;
 	int					eat_end;
 	//다 먹었는지 모니터 philo_num == *full_philo;
 	int					philo_num;
-	//데이터 레이스가 발생하는 부분은 포인터 받기
-	// 먹기 시작하면 시간 업데이트
-	long long			*start_time;
-	// 포크를 들기 전 공유 자원 접근
+	//배열 부분
+	// 1. 먹기 시작하면 시간 업데이트
+	long long			start_time;
+	long long			*start_eat_time;
+	// 2. 포크를 들기 전 공유 자원 접근
 	char				*forks;
 	//종료를 확안하는 1개 flag
-	char				*is_over;
+	char				is_over;
 	//배부른 철학자가 전체 철학자와 같으면 종료, is_over == 1;
-	int					*full_philo;
+	int					full_philo;
 	//처음 아이디 설정만 함
 	pthread_mutex_t		id_mutex;
 	pthread_mutex_t		fork_mutex;
@@ -62,13 +62,13 @@ typedef struct s_data
 	pthread_mutex_t		full_mutex;
 }	t_data;
 
-
-
-1. 각각의 철학자는 지금 시간을 업데이트 한다.
-
-
 void	on_error(int ERROR_CODE);
 int		is_input_valid(char *str, int i, int sign);
 int		ft_atoi(char *str);
-void	print_died(unsigned long sec, unsigned long usec, int id);
+void	print_log(t_data *data, int LOG_MSG, int id);
+void	sleeping(t_data *data, int id);
+void	eating(t_data *data, int id);
+void	thinking(t_data *data, int id);
+void	fork_up(t_data *data, int id);
+void	fork_down(t_data *data, int id);
 #endif

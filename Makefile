@@ -1,12 +1,13 @@
 CC = cc
-CFLAGS = -Wall -Werror -Wextra -I$(HEADER)
+# CFLAGS = -Wall -Werror -Wextra -I$(HEADER)
+CFLAGS = 
 NAME = philo
 
 SRC_FILES = 00.main.c \
 01.parse.c \
 02.err.c \
 03.print.c \
-
+04.module.c
 OBJ_DIR = objs
 HEADER = .
 SRC_DIR = .
