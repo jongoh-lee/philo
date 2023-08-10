@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   01.parse.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jongolee <jongolee@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jongohlee <jongohlee@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/21 19:01:41 by jongolee          #+#    #+#             */
-/*   Updated: 2023/08/08 03:06:17 by jongolee         ###   ########.fr       */
+/*   Updated: 2023/08/10 14:01:33 by jongohlee        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,4 +72,18 @@ int	ft_atoi(char *str)
 		result += str[i++] - '0';
 	}
 	return (result * sign);
+}
+
+int	check_arg(char **av, int ac)
+{
+	int i;
+
+	i = 1;
+	while (i < ac)
+	{
+		if (!is_input_valid(av[i], 0, 1))
+			return (0);
+		i++;
+	}
+	return (1);
 }

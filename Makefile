@@ -4,10 +4,10 @@ CFLAGS =
 NAME = philo
 
 SRC_FILES = 00.main.c \
-01.parse.c \
-02.err.c \
-03.print.c \
-04.module.c
+		01.parse.c \
+		02.err.c \
+		03.module1.c \
+		04.module2.c
 OBJ_DIR = objs
 HEADER = .
 SRC_DIR = .

@@ -1,226 +1,134 @@
-0ms 1 has taken a fork
-0ms 1 has taken a fork
-0ms 1 is eating
-0ms 3 has taken a fork
-0ms 3 has taken a fork
-0ms 3 is eating
-46ms 2 has taken a fork
-46ms 2 has taken a fork
-46ms 2 is eating
-46ms 4 has taken a fork
-47ms 4 has taken a fork
-47ms 4 is eating
-50ms 1 is sleeping
-50ms 3 is sleeping
-97ms 2 is sleeping
-97ms 4 is sleeping
-105ms 1 is thinking
-105ms 3 is thinking
-105ms 3 has taken a fork
-105ms 3 has taken a fork
-105ms 3 is eating
-105ms 1 has taken a fork
-105ms 1 has taken a fork
-105ms 1 is eating
-151ms 2 is thinking
-151ms 4 is thinking
-151ms 2 has taken a fork
-151ms 2 has taken a fork
-151ms 2 is eating
-151ms 4 has taken a fork
-151ms 4 has taken a fork
-151ms 4 is eating
-156ms 3 is sleeping
-156ms 1 is sleeping
-206ms 4 is sleeping
-206ms 2 is sleeping
-210ms 3 is thinking
-210ms 1 is thinking
-210ms 1 has taken a fork
-210ms 1 has taken a fork
-210ms 1 is eating
-210ms 3 has taken a fork
-210ms 3 has taken a fork
-210ms 3 is eating
-260ms 4 is thinking
-260ms 2 is thinking
-260ms 4 has taken a fork
-260ms 4 has taken a fork
-260ms 4 is eating
-260ms 1 is sleeping
-260ms 2 has taken a fork
-260ms 2 has taken a fork
-260ms 3 is sleeping
-260ms 2 is eating
-310ms 4 is sleeping
-310ms 1 is thinking
-310ms 1 has taken a fork
-310ms 1 has taken a fork
-310ms 1 is eating
-310ms 2 is sleeping
-310ms 3 is thinking
-310ms 3 has taken a fork
-310ms 3 has taken a fork
-310ms 3 is eating
-364ms 4 is thinking
-364ms 4 has taken a fork
-364ms 4 has taken a fork
-364ms 4 is eating
-364ms 1 is sleeping
-364ms 2 is thinking
-364ms 2 has taken a fork
-364ms 2 has taken a fork
-364ms 2 is eating
-364ms 3 is sleeping
-414ms 4 is sleeping
-414ms 2 is sleeping
-414ms 1 is thinking
-414ms 1 has taken a fork
-414ms 1 has taken a fork
-414ms 1 is eating
-414ms 3 is thinking
-414ms 3 has taken a fork
-414ms 3 has taken a fork
-414ms 3 is eating
-464ms 2 is thinking
-464ms 1 is sleeping
-464ms 2 has taken a fork
-464ms 2 has taken a fork
-464ms 2 is eating
-464ms 4 is thinking
-465ms 4 has taken a fork
-465ms 4 has taken a fork
-465ms 4 is eating
-465ms 3 is sleeping
-519ms 1 is thinking
-519ms 4 is sleeping
-519ms 1 has taken a fork
-519ms 1 has taken a fork
-519ms 1 is eating
-519ms 3 is thinking
-519ms 3 has taken a fork
-519ms 3 has taken a fork
-519ms 3 is eating
-519ms 2 is sleeping
-570ms 4 is thinking
-570ms 1 is sleeping
-570ms 4 has taken a fork
-570ms 4 has taken a fork
-570ms 4 is eating
-570ms 3 is sleeping
-571ms 2 is thinking
-571ms 2 has taken a fork
-571ms 2 has taken a fork
-571ms 2 is eating
-621ms 2 is sleeping
-621ms 1 is thinking
-621ms 4 is sleeping
-621ms 1 has taken a fork
-621ms 1 has taken a fork
-621ms 1 is eating
-621ms 3 is thinking
-621ms 3 has taken a fork
-621ms 3 has taken a fork
-621ms 3 is eating
-676ms 2 is thinking
-676ms 1 is sleeping
-676ms 3 is sleeping
-676ms 2 has taken a fork
-676ms 2 has taken a fork
-676ms 4 is thinking
-676ms 2 is eating
-676ms 4 has taken a fork
-676ms 4 has taken a fork
-676ms 4 is eating
-726ms 2 is sleeping
-730ms 1 is thinking
-730ms 1 has taken a fork
-730ms 1 has taken a fork
-730ms 1 is eating
-730ms 4 is sleeping
-730ms 3 is thinking
-730ms 3 has taken a fork
-730ms 3 has taken a fork
-730ms 3 is eating
-780ms 2 is thinking
-780ms 2 has taken a fork
-780ms 2 has taken a fork
-780ms 2 is eating
-782ms 1 is sleeping
-782ms 3 is sleeping
-782ms 4 is thinking
-782ms 4 has taken a fork
-782ms 4 has taken a fork
-782ms 4 is eating
-835ms 2 is sleeping
-835ms 3 is thinking
-835ms 4 is sleeping
-835ms 3 has taken a fork
-835ms 3 has taken a fork
-835ms 3 is eating
-835ms 1 is thinking
-835ms 1 has taken a fork
-835ms 1 has taken a fork
-835ms 1 is eating
-885ms 1 is sleeping
-886ms 2 is thinking
-886ms 2 has taken a fork
-886ms 2 has taken a fork
-886ms 2 is eating
-886ms 4 is thinking
-886ms 4 has taken a fork
-886ms 4 has taken a fork
-886ms 4 is eating
-886ms 3 is sleeping
-936ms 2 is sleeping
-936ms 4 is sleeping
-936ms 1 is thinking
-936ms 3 is thinking
-936ms 3 has taken a fork
-936ms 3 has taken a fork
-936ms 3 is eating
-936ms 1 has taken a fork
-936ms 1 has taken a fork
-936ms 1 is eating
-988ms 2 is thinking
-988ms 3 is sleeping
-988ms 2 has taken a fork
-988ms 2 has taken a fork
-988ms 2 is eating
-988ms 1 is sleeping
-988ms 4 is thinking
-988ms 4 has taken a fork
-988ms 4 has taken a fork
-988ms 4 is eating
-1043ms 3 is thinking
-1043ms 3 has taken a fork
-1043ms 3 has taken a fork
-1043ms 3 is eating
-1043ms 2 is sleeping
-1043ms 4 is sleeping
-1043ms 1 is thinking
-1043ms 1 has taken a fork
-1043ms 1 has taken a fork
-1043ms 1 is eating
-1093ms 1 is sleeping
-1096ms 3 is sleeping
-1096ms 2 is thinking
-1096ms 2 has taken a fork
-1096ms 2 has taken a fork
-1096ms 2 is eating
-1096ms 4 is thinking
-1096ms 4 has taken a fork
-1096ms 4 has taken a fork
-1096ms 4 is eating
-1144ms 1 is thinking
-1144ms 1 has taken a fork
-1144ms 1 has taken a fork
-1144ms 1 is eating
-1151ms 3 is thinking
-1151ms 3 has taken a fork
-1151ms 3 has taken a fork
-1151ms 2 is sleeping
-1151ms 3 is eating
-1151ms 4 is sleeping
-1194ms 1 is sleeping
-1206ms 2 died
+0 1 has taken a fork
+0 1 has taken a fork
+0 1 is eating
+0 3 has taken a fork
+0 3 has taken a fork
+0 3 is eating
+205 1 is sleeping
+205 2 has taken a fork
+205 2 has taken a fork
+205 2 is eating
+205 4 has taken a fork
+205 3 is sleeping
+205 4 has taken a fork
+205 4 is eating
+407 1 is thinking
+407 2 is sleeping
+407 3 is thinking
+407 4 is sleeping
+407 1 has taken a fork
+407 1 has taken a fork
+407 1 is eating
+407 3 has taken a fork
+407 3 has taken a fork
+407 3 is eating
+610 2 is thinking
+610 1 is sleeping
+610 4 is thinking
+610 4 has taken a fork
+610 3 is sleeping
+610 2 has taken a fork
+610 4 has taken a fork
+610 4 is eating
+610 2 has taken a fork
+610 2 is eating
+813 1 is thinking
+813 1 has taken a fork
+813 1 has taken a fork
+813 1 is eating
+813 3 is thinking
+813 2 is sleeping
+813 3 has taken a fork
+813 3 has taken a fork
+813 3 is eating
+814 4 is sleeping
+1016 1 is sleeping
+1016 3 is sleeping
+1016 2 is thinking
+1016 2 has taken a fork
+1016 2 has taken a fork
+1016 2 is eating
+1016 4 is thinking
+1016 4 has taken a fork
+1016 4 has taken a fork
+1016 4 is eating
+1217 1 is thinking
+1217 2 is sleeping
+1217 4 is sleeping
+1217 1 has taken a fork
+1217 1 has taken a fork
+1217 1 is eating
+1217 3 is thinking
+1217 3 has taken a fork
+1217 3 has taken a fork
+1217 3 is eating
+1422 3 is sleeping
+1422 2 is thinking
+1422 2 has taken a fork
+1422 2 has taken a fork
+1422 2 is eating
+1422 4 is thinking
+1422 1 is sleeping
+1422 4 has taken a fork
+1422 4 has taken a fork
+1422 4 is eating
+1622 3 is thinking
+1622 4 is sleeping
+1622 1 is thinking
+1622 3 has taken a fork
+1622 1 has taken a fork
+1622 1 has taken a fork
+1622 1 is eating
+1622 3 has taken a fork
+1622 3 is eating
+1622 2 is sleeping
+1823 4 is thinking
+1823 3 is sleeping
+1823 1 is sleeping
+1823 4 has taken a fork
+1823 4 has taken a fork
+1823 4 is eating
+1823 2 is thinking
+1823 2 has taken a fork
+1823 2 has taken a fork
+1823 2 is eating
+2023 3 is thinking
+2023 1 is thinking
+2023 4 is sleeping
+2023 3 has taken a fork
+2023 3 has taken a fork
+2023 3 is eating
+2023 1 has taken a fork
+2023 1 has taken a fork
+2023 1 is eating
+2023 2 is sleeping
+2223 4 is thinking
+2223 1 is sleeping
+2223 2 is thinking
+2225 2 has taken a fork
+2225 4 has taken a fork
+2225 4 has taken a fork
+2225 4 is eating
+2225 2 has taken a fork
+2225 2 is eating
+2225 3 is sleeping
+2424 1 is thinking
+2426 4 is sleeping
+2426 2 is sleeping
+2426 3 is thinking
+2426 3 has taken a fork
+2426 3 has taken a fork
+2426 3 is eating
+2426 1 has taken a fork
+2426 1 has taken a fork
+2426 1 is eating
+2626 4 is thinking
+2626 2 is thinking
+2626 3 is sleeping
+2626 4 has taken a fork
+2626 4 has taken a fork
+2626 4 is eating
+2626 2 has taken a fork
+2626 2 has taken a fork
+2626 1 is sleeping
+2626 2 is eating

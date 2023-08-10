@@ -6,7 +6,7 @@
 /*   By: jongohlee <jongohlee@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/21 18:59:58 by jongolee          #+#    #+#             */
-/*   Updated: 2023/08/10 02:38:28 by jongohlee        ###   ########.fr       */
+/*   Updated: 2023/08/10 16:47:54 by jongohlee        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,20 +55,26 @@ typedef struct s_data
 	int					full_philo;
 	//처음 아이디 설정만 함
 	pthread_mutex_t		id_mutex;
-	pthread_mutex_t		fork_mutex;
+	pthread_mutex_t		*fork_mutexes;
 	//각각의 출력 전에 확인, 모든 영역에 lock을 걸게 되면 sleep을 만나 lock을 취득하고 대기상태로 빠짐
 	pthread_mutex_t		over_mutex;
 	//다 먹고 난 후 각각의 철학자가 더하기 1;
 	pthread_mutex_t		full_mutex;
 }	t_data;
 
-void	on_error(int ERROR_CODE);
+//parse
+int		check_arg(char **av, int ac);
 int		is_input_valid(char *str, int i, int sign);
 int		ft_atoi(char *str);
+//error
+void	on_error(int ERROR_CODE);
+
+//module1
 void	print_log(t_data *data, int LOG_MSG, int id);
-void	sleeping(t_data *data, int id);
+void	make_philos(t_data *data, pthread_t **threads);
+void	monitor_philos(t_data *data);
+//module2
 void	eating(t_data *data, int id);
-void	thinking(t_data *data, int id);
 void	fork_up(t_data *data, int id);
 void	fork_down(t_data *data, int id);
 #endif
