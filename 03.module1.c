@@ -6,7 +6,7 @@
 /*   By: jongohlee <jongohlee@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/21 20:50:17 by jongolee          #+#    #+#             */
-/*   Updated: 2023/08/10 17:05:48 by jongohlee        ###   ########.fr       */
+/*   Updated: 2023/08/10 17:14:16 by jongohlee        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ void	make_philos(t_data *data, pthread_t **threads)
 	}
 	i = 0;
 	gettimeofday(&tv, NULL);
-	data->start_time = tv.tv_sec * 1000 + tv.tv_usec/1000;
+	data->start_time = tv.tv_sec * 1000 + tv.tv_usec / 1000;
 	while (i < data->philo_num)
 	{
 		data->start_eat_time[i] = data->start_time;
@@ -74,7 +74,7 @@ void	monitor_philos(t_data *data)
 			break ;
 		pthread_mutex_unlock(&data->over_mutex);
 		gettimeofday(&tv, NULL);
-		now = tv.tv_sec * 1000 + tv.tv_usec/1000;
+		now = tv.tv_sec * 1000 + tv.tv_usec / 1000;
 		if (now - data->start_eat_time[i] >= data->time_to_die)
 		{
 			pthread_mutex_lock(&data->over_mutex);
@@ -98,13 +98,17 @@ void	print_log(t_data *data, int LOG_MSG, int id)
 	if (!data->is_over)
 	{
 		if (LOG_MSG == FORK)
-			printf("%lld %d has taken a fork\n", (tv.tv_sec * 1000 + tv.tv_usec/1000) - data->start_time, id);
+			printf("%lld %d has taken a fork\n", \
+			(tv.tv_sec * 1000 + tv.tv_usec / 1000) - data->start_time, id);
 		else if (LOG_MSG == EATING)
-			printf("%lld %d is eating\n", (tv.tv_sec * 1000 + tv.tv_usec/1000) - data->start_time, id);
+			printf("%lld %d is eating\n", \
+			(tv.tv_sec * 1000 + tv.tv_usec / 1000) - data->start_time, id);
 		else if (LOG_MSG == SLEEPING)
-			printf("%lld %d is sleeping\n", (tv.tv_sec * 1000 + tv.tv_usec/1000) - data->start_time, id);
+			printf("%lld %d is sleeping\n", \
+			(tv.tv_sec * 1000 + tv.tv_usec / 1000) - data->start_time, id);
 		else if (LOG_MSG == THINKING)
-			printf("%lld %d is thinking\n", (tv.tv_sec * 1000 + tv.tv_usec/1000) - data->start_time, id);
+			printf("%lld %d is thinking\n", \
+			(tv.tv_sec * 1000 + tv.tv_usec / 1000) - data->start_time, id);
 	}
 	pthread_mutex_unlock(&data->over_mutex);
 }

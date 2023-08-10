@@ -6,7 +6,7 @@
 /*   By: jongohlee <jongohlee@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/21 19:02:51 by jongolee          #+#    #+#             */
-/*   Updated: 2023/08/10 02:09:57 by jongohlee        ###   ########.fr       */
+/*   Updated: 2023/08/10 17:13:01 by jongohlee        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,12 +21,12 @@ void	on_error(int ERROR_CODE)
 	else if (ERROR_CODE == ARG)
 	{
 		printf(
-		"[argument format] 1 2 3 4 [5]\n"
-		"1)number_of_philosophers\n"
-		"2)time_to_die(ms)\n"
-		"3)time_to_eat(ms)\n"
-		"4)time_to_sleep(ms)\n"
-		"[5]number_of_times_each_philosopher_must_eat\n");	
+			"[argument format] 1 2 3 4 [5]\n"
+			"1)number_of_philosophers\n"
+			"2)time_to_die(ms)\n"
+			"3)time_to_eat(ms)\n"
+			"4)time_to_sleep(ms)\n"
+			"[5]number_of_times_each_philosopher_must_eat\n");
 	}
 	exit(EXIT_FAILURE);
 }

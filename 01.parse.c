@@ -6,7 +6,7 @@
 /*   By: jongohlee <jongohlee@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/21 19:01:41 by jongolee          #+#    #+#             */
-/*   Updated: 2023/08/10 14:01:33 by jongohlee        ###   ########.fr       */
+/*   Updated: 2023/08/10 17:12:31 by jongohlee        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,7 @@ int	ft_atoi(char *str)
 
 int	check_arg(char **av, int ac)
 {
-	int i;
+	int	i;
 
 	i = 1;
 	while (i < ac)

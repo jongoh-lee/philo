@@ -6,7 +6,7 @@
 /*   By: jongohlee <jongohlee@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/21 19:00:34 by jongolee          #+#    #+#             */
-/*   Updated: 2023/08/10 15:30:30 by jongohlee        ###   ########.fr       */
+/*   Updated: 2023/08/10 17:10:47 by jongohlee        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,6 @@
 
 int	init(t_data *data, pthread_t **threads, char **av, int ac)
 {
-	if (check_arg(av, ac) == 0)
-		return (0);
 	data->id = 0;
 	data->time_to_die = ft_atoi(av[2]);
 	data->eating_time = ft_atoi(av[3]);
@@ -36,14 +34,15 @@ int	init(t_data *data, pthread_t **threads, char **av, int ac)
 	data->eat_count = malloc(sizeof(int) * data->philo_num);
 	*threads = malloc(sizeof(pthread_t) * data->philo_num);
 	data->fork_mutexes = malloc(sizeof(pthread_mutex_t) * data->philo_num);
-	if (!(data->start_eat_time || data->forks || data->eat_count || data->fork_mutexes || *threads))
+	if (!(data->start_eat_time || data->forks || data->eat_count \
+	|| data->fork_mutexes || *threads))
 		on_error(MALLOC);
 	return (1);
 }
 
 void	detach_philos(pthread_t **threads, int philos)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	while (i < philos)
@@ -60,11 +59,6 @@ void	free_data(t_data *data, pthread_t **threads)
 	free(*threads);
 }
 
-// void	hi()
-// {
-// 	system("leaks philo");
-// }
-
 void	mutex_destroy(t_data *data)
 {
 	int	i;
@@ -79,15 +73,20 @@ void	mutex_destroy(t_data *data)
 		i++;
 	}
 }
+// void	hi()
+// {
+// 	system("leaks philo");
+// }
 
-int main(int ac, char **av)
+int	main(int ac, char **av)
 {
-	// atexit(hi);
-	pthread_t		*threads;
-	t_data			data;
+	pthread_t	*threads;
+	t_data		data;
 
 	if (!(ac == 5 || ac == 6))
 		on_error(ARG);
+	if (check_arg(av, ac) == 0)
+		return (0);
 	if (!init(&data, &threads, av, ac))
 		return (0);
 	make_philos(&data, &threads);
