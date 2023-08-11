@@ -1,7 +1,6 @@
 CC = cc
-# CFLAGS = -Wall -Werror -Wextra -I$(HEADER)
-CFLAGS = 
-NAME = philo
+CFLAGS = -Wall -Werror -Wextra -I$(HEADER)
+NAME = philo_bonus
 
 SRC_FILES = 00.main.c \
 		01.parse.c \
