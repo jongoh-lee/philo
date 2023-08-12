@@ -6,7 +6,7 @@
 /*   By: jongohlee <jongohlee@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/21 20:50:17 by jongolee          #+#    #+#             */
-/*   Updated: 2023/08/12 15:47:44 by jongohlee        ###   ########.fr       */
+/*   Updated: 2023/08/12 18:15:17 by jongohlee        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ void	*philo(void *arg)
 	id = ++data->id;
 	pthread_mutex_unlock(&data->id_mutex);
 	if (id % 2 == 0)
-		usleep((data->eating_time) * 500);
+		usleep((data->eating_time) * 200);
 	while (1)
 	{
 		fork_up(data, id);
@@ -66,26 +66,29 @@ void	monitor_philos(t_data *data, int i)
 	struct timeval	tv;
 	long long		now;
 
-	while (i < data->philo_num)
+	while (1)
 	{
-		gettimeofday(&tv, NULL);
-		now = tv.tv_sec * 1000 + tv.tv_usec / 1000;
-		pthread_mutex_lock(&data->full_mutex);
-		if (data->full_philo == data->philo_num)
+		usleep(50);
+		i = 0;
+		while (i < data->philo_num)
 		{
-			pthread_mutex_lock(&data->over_mutex);
-			break ;
+			gettimeofday(&tv, NULL);
+			now = tv.tv_sec * 1000 + tv.tv_usec / 1000;
+			pthread_mutex_lock(&data->full_mutex);
+			if (data->full_philo == data->philo_num)
+			{
+				pthread_mutex_lock(&data->over_mutex);
+				return ;
+			}
+			pthread_mutex_unlock(&data->full_mutex);
+			if (now - data->start_eat_time[i] >= data->time_to_die)
+			{
+				pthread_mutex_lock(&data->over_mutex);
+				printf("%lld %d died\n", (now - data->start_time), i + 1);
+				return ;
+			}
+			i++;
 		}
-		pthread_mutex_unlock(&data->full_mutex);
-		if (now - data->start_eat_time[i] >= data->time_to_die)
-		{
-			pthread_mutex_lock(&data->over_mutex);
-			printf("%lld %d died\n", (now - data->start_time), i + 1);
-			break ;
-		}
-		i++;
-		if (i == data->philo_num)
-			i = 0;
 	}
 }
 
@@ -125,5 +128,5 @@ void	print_log(t_data *data, int LOG_MSG, int id)
 		pthread_mutex_unlock(&data->over_mutex);
 	}
 	else
-		printf_log2(data, LOG_MSG, id, now);
+		print_log2(data, LOG_MSG, id, now);
 }
