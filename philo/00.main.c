@@ -6,7 +6,7 @@
 /*   By: jongohlee <jongohlee@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/21 19:00:34 by jongolee          #+#    #+#             */
-/*   Updated: 2023/08/10 17:10:47 by jongohlee        ###   ########.fr       */
+/*   Updated: 2023/08/12 14:57:25 by jongohlee        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,8 @@ void	detach_philos(pthread_t **threads, int philos)
 	i = 0;
 	while (i < philos)
 	{
-		pthread_detach((*threads)[i]);
+		if (pthread_detach((*threads)[i]) != 0)
+			return ;
 		i++;
 	}
 }
@@ -73,13 +74,14 @@ void	mutex_destroy(t_data *data)
 		i++;
 	}
 }
-// void	hi()
-// {
-// 	system("leaks philo");
-// }
+void	hi()
+{
+	system("leaks philo");
+}
 
 int	main(int ac, char **av)
 {
+	// atexit(hi);
 	pthread_t	*threads;
 	t_data		data;
 
@@ -91,7 +93,7 @@ int	main(int ac, char **av)
 		return (0);
 	make_philos(&data, &threads);
 	detach_philos(&threads, data.philo_num);
-	monitor_philos(&data);
+	monitor_philos(&data, 0);
 	free_data(&data, &threads);
 	mutex_destroy(&data);
 	return (0);

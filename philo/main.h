@@ -6,7 +6,7 @@
 /*   By: jongohlee <jongohlee@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/21 18:59:58 by jongolee          #+#    #+#             */
-/*   Updated: 2023/08/10 17:08:50 by jongohlee        ###   ########.fr       */
+/*   Updated: 2023/08/12 14:54:07 by jongohlee        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ void	on_error(int ERROR_CODE);
 //module1
 void	print_log(t_data *data, int LOG_MSG, int id);
 void	make_philos(t_data *data, pthread_t **threads);
-void	monitor_philos(t_data *data);
+void	monitor_philos(t_data *data, int i);
 //module2
 void	eating(t_data *data, int id);
 void	fork_up(t_data *data, int id);
