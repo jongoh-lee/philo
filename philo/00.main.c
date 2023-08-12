@@ -6,7 +6,7 @@
 /*   By: jongohlee <jongohlee@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/21 19:00:34 by jongolee          #+#    #+#             */
-/*   Updated: 2023/08/12 14:57:25 by jongohlee        ###   ########.fr       */
+/*   Updated: 2023/08/12 15:06:44 by jongohlee        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,10 +74,10 @@ void	mutex_destroy(t_data *data)
 		i++;
 	}
 }
-void	hi()
-{
-	system("leaks philo");
-}
+// void	hi()
+// {
+// 	system("leaks philo");
+// }
 
 int	main(int ac, char **av)
 {
