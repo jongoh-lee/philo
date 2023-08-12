@@ -6,7 +6,7 @@
 /*   By: jongohlee <jongohlee@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/21 19:00:34 by jongolee          #+#    #+#             */
-/*   Updated: 2023/08/12 15:06:44 by jongohlee        ###   ########.fr       */
+/*   Updated: 2023/08/12 15:12:40 by jongohlee        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,6 @@ int	init(t_data *data, pthread_t **threads, char **av, int ac)
 	pthread_mutex_init(&data->id_mutex, NULL);
 	pthread_mutex_init(&data->over_mutex, NULL);
 	pthread_mutex_init(&data->full_mutex, NULL);
-	data->is_over = 0;
 	data->full_philo = 0;
 	data->start_eat_time = malloc(sizeof(long long) * data->philo_num);
 	data->forks = malloc(sizeof(char) * data->philo_num);

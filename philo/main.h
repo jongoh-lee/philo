@@ -6,7 +6,7 @@
 /*   By: jongohlee <jongohlee@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/21 18:59:58 by jongolee          #+#    #+#             */
-/*   Updated: 2023/08/12 14:54:07 by jongohlee        ###   ########.fr       */
+/*   Updated: 2023/08/12 15:12:45 by jongohlee        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,6 @@ typedef struct s_data
 	long long			start_time;
 	long long			*start_eat_time;
 	char				*forks;
-	char				is_over;
 	int					full_philo;
 	pthread_mutex_t		id_mutex;
 	pthread_mutex_t		*fork_mutexes;

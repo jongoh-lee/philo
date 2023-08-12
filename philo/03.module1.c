@@ -6,7 +6,7 @@
 /*   By: jongohlee <jongohlee@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/21 20:50:17 by jongolee          #+#    #+#             */
-/*   Updated: 2023/08/12 14:59:41 by jongohlee        ###   ########.fr       */
+/*   Updated: 2023/08/12 15:47:44 by jongohlee        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,6 +89,22 @@ void	monitor_philos(t_data *data, int i)
 	}
 }
 
+void	print_log2(t_data *data, int LOG_MSG, int id, long long now)
+{
+	if (LOG_MSG == SLEEPING)
+	{
+		pthread_mutex_lock(&data->over_mutex);
+		printf("%lld %d is sleeping\n", now, id);
+		pthread_mutex_unlock(&data->over_mutex);
+	}
+	else if (LOG_MSG == THINKING)
+	{
+		pthread_mutex_lock(&data->over_mutex);
+		printf("%lld %d is thinking\n", now, id);
+		pthread_mutex_unlock(&data->over_mutex);
+	}
+}
+
 void	print_log(t_data *data, int LOG_MSG, int id)
 {
 	struct timeval	tv;
@@ -108,16 +124,6 @@ void	print_log(t_data *data, int LOG_MSG, int id)
 		printf("%lld %d is eating\n", now, id);
 		pthread_mutex_unlock(&data->over_mutex);
 	}
-	else if (LOG_MSG == SLEEPING)
-	{
-		pthread_mutex_lock(&data->over_mutex);
-		printf("%lld %d is sleeping\n", now, id);
-		pthread_mutex_unlock(&data->over_mutex);
-	}
 	else
-	{
-		pthread_mutex_lock(&data->over_mutex);
-		printf("%lld %d is thinking\n", now, id);
-		pthread_mutex_unlock(&data->over_mutex);
-	}
+		printf_log2(data, LOG_MSG, id, now);
 }
