@@ -1,12 +1,13 @@
 CC = cc
-CFLAGS = -Wall -Werror -Wextra -I$(HEADER)
+CFLAGS = -Wall -Werror -Wextra -I$(HEADER) -fsanitize=address
 NAME = philo_bonus
 
-SRC_FILES = 00.main.c \
-		01.parse.c \
-		02.err.c \
-		03.module1.c \
-		04.module2.c
+SRC_FILES = 00.main_bonus.c \
+		01.parse_bonus.c \
+		02.err_bonus.c \
+		03.hooks_bonus.c \
+		04.modules_bonus.c \
+		05.modules_bonus.c
 OBJ_DIR = objs
 HEADER = .
 SRC_DIR = .
