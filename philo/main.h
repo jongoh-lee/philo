@@ -21,6 +21,7 @@ enum e_log {
 
 typedef struct s_data
 {
+	char				is_died;
 	int					id;
 	int					time_to_die;
 	int					eating_time;
@@ -36,6 +37,7 @@ typedef struct s_data
 	pthread_mutex_t		*fork_mutexes;
 	pthread_mutex_t		over_mutex;
 	pthread_mutex_t		full_mutex;
+	pthread_mutex_t		time_mutex;
 }	t_data;
 
 //parse
@@ -49,6 +51,8 @@ void	on_error(int ERROR_CODE);
 void	print_log(t_data *data, int LOG_MSG, int id);
 void	make_philos(t_data *data, pthread_t **threads);
 void	monitor_philos(t_data *data, int i);
+long long	get_time();
+void	ft_sleep(long long time, int last);
 //module2
 void	eating(t_data *data, int id);
 void	fork_up(t_data *data, int id);

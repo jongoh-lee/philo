@@ -15,6 +15,7 @@ int	init(t_data *data, pthread_t **threads, char **av, int ac)
 	pthread_mutex_init(&data->id_mutex, NULL);
 	pthread_mutex_init(&data->over_mutex, NULL);
 	pthread_mutex_init(&data->full_mutex, NULL);
+	pthread_mutex_init(&data->time_mutex, NULL);
 	data->full_philo = 0;
 	data->start_eat_time = malloc(sizeof(long long) * data->philo_num);
 	data->forks = malloc(sizeof(char) * data->philo_num);
@@ -55,16 +56,13 @@ void	mutex_destroy(t_data *data)
 	pthread_mutex_destroy(&data->id_mutex);
 	pthread_mutex_destroy(&data->over_mutex);
 	pthread_mutex_destroy(&data->full_mutex);
+	pthread_mutex_destroy(&data->time_mutex);
 	while (i < data->philo_num)
 	{
 		pthread_mutex_destroy(&data->fork_mutexes[i]);
 		i++;
 	}
 }
-// void	hi()
-// {
-// 	system("leaks philo");
-// }
 
 int	main(int ac, char **av)
 {
@@ -81,7 +79,8 @@ int	main(int ac, char **av)
 	make_philos(&data, &threads);
 	detach_philos(&threads, data.philo_num);
 	monitor_philos(&data, 0);
-	free_data(&data, &threads);
+	sleep(1);
 	mutex_destroy(&data);
+	free_data(&data, &threads);
 	return (0);
 }

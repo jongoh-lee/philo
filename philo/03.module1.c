@@ -1,5 +1,17 @@
 #include "./main.h"
 
+void	ft_sleep(long long time, int last)
+{
+	while (1)
+	{
+		if (get_time() - time >= last * 1000)
+			break ;
+		else
+			usleep(1);
+	}
+
+}
+
 void	*philo(void *arg)
 {
 	int				id;
@@ -10,14 +22,14 @@ void	*philo(void *arg)
 	id = ++data->id;
 	pthread_mutex_unlock(&data->id_mutex);
 	if (id % 2 == 0)
-		usleep((data->eating_time) * 200);
+		usleep((data->eating_time) * 100);
 	while (1)
 	{
 		fork_up(data, id);
 		eating(data, id);
 		fork_down(data, id);
 		print_log(data, SLEEPING, id);
-		usleep(data->sleeping_time * 1000);
+		ft_sleep(get_time(), data->sleeping_time);
 		print_log(data, THINKING, id);
 	}
 	return (0);
@@ -25,7 +37,6 @@ void	*philo(void *arg)
 
 void	make_philos(t_data *data, pthread_t **threads)
 {
-	struct timeval	tv;
 	int				i;
 
 	i = 0;
@@ -38,8 +49,7 @@ void	make_philos(t_data *data, pthread_t **threads)
 		i++;
 	}
 	i = 0;
-	gettimeofday(&tv, NULL);
-	data->start_time = tv.tv_sec * 1000 + tv.tv_usec / 1000;
+	data->start_time = get_time();
 	while (i < data->philo_num)
 	{
 		data->start_eat_time[i] = data->start_time;
@@ -51,17 +61,13 @@ void	make_philos(t_data *data, pthread_t **threads)
 
 void	monitor_philos(t_data *data, int i)
 {
-	struct timeval	tv;
 	long long		now;
 
 	while (1)
 	{
-		usleep(50);
 		i = 0;
 		while (i < data->philo_num)
 		{
-			gettimeofday(&tv, NULL);
-			now = tv.tv_sec * 1000 + tv.tv_usec / 1000;
 			pthread_mutex_lock(&data->full_mutex);
 			if (data->full_philo == data->philo_num)
 			{
@@ -69,31 +75,27 @@ void	monitor_philos(t_data *data, int i)
 				return ;
 			}
 			pthread_mutex_unlock(&data->full_mutex);
-			if (now - data->start_eat_time[i] >= data->time_to_die)
+			pthread_mutex_lock(&data->time_mutex);
+			now = get_time();
+			if (now - data->start_eat_time[i] >= data->time_to_die * 1000)
 			{
 				pthread_mutex_lock(&data->over_mutex);
-				printf("%lld %d died\n", (now - data->start_time), i + 1);
+				printf("\033[0;31m%lld %d died\n", (now - data->start_time) / 1000, i + 1);
 				return ;
 			}
+			pthread_mutex_unlock(&data->time_mutex);
 			i++;
 		}
+		usleep(100);
 	}
 }
 
-void	print_log2(t_data *data, int LOG_MSG, int id, long long now)
+void	print_log2(int LOG_MSG, int id, long long now)
 {
 	if (LOG_MSG == SLEEPING)
-	{
-		pthread_mutex_lock(&data->over_mutex);
 		printf("%lld %d is sleeping\n", now, id);
-		pthread_mutex_unlock(&data->over_mutex);
-	}
 	else if (LOG_MSG == THINKING)
-	{
-		pthread_mutex_lock(&data->over_mutex);
 		printf("%lld %d is thinking\n", now, id);
-		pthread_mutex_unlock(&data->over_mutex);
-	}
 }
 
 void	print_log(t_data *data, int LOG_MSG, int id)
@@ -101,20 +103,16 @@ void	print_log(t_data *data, int LOG_MSG, int id)
 	struct timeval	tv;
 	long long		now;
 
+	pthread_mutex_lock(&data->time_mutex);
+	pthread_mutex_lock(&data->over_mutex);
 	gettimeofday(&tv, NULL);
-	now = (tv.tv_sec * 1000 + tv.tv_usec / 1000) - data->start_time;
+	now = (get_time() - data->start_time) / 1000;
 	if (LOG_MSG == FORK)
-	{
-		pthread_mutex_lock(&data->over_mutex);
 		printf("%lld %d has taken a fork\n", now, id);
-		pthread_mutex_unlock(&data->over_mutex);
-	}
 	else if (LOG_MSG == EATING)
-	{
-		pthread_mutex_lock(&data->over_mutex);
 		printf("%lld %d is eating\n", now, id);
-		pthread_mutex_unlock(&data->over_mutex);
-	}
 	else
-		print_log2(data, LOG_MSG, id, now);
+		print_log2(LOG_MSG, id, now);
+	pthread_mutex_unlock(&data->over_mutex);
+	pthread_mutex_unlock(&data->time_mutex);
 }
