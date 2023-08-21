@@ -15,18 +15,18 @@ void	fork_up(t_data *data, int id)
 	if (id % 2 == 0)
 	{
 		pthread_mutex_lock(&data->fork_mutexes[id - 1]);
-		pthread_mutex_lock(&data->fork_mutexes[id % data->philo_num]);
 		data->forks[(id - 1)] = '0';
 		print_log(data, FORK, id);
+		pthread_mutex_lock(&data->fork_mutexes[id % data->philo_num]);
 		data->forks[id % data->philo_num] = '0';
 		print_log(data, FORK, id);
 	}
 	else
 	{
 		pthread_mutex_lock(&data->fork_mutexes[id % data->philo_num]);
-		pthread_mutex_lock(&data->fork_mutexes[id - 1]);
 		data->forks[id % data->philo_num] = '0';
 		print_log(data, FORK, id);
+		pthread_mutex_lock(&data->fork_mutexes[id - 1]);
 		data->forks[(id - 1)] = '0';
 		print_log(data, FORK, id);
 	}
@@ -52,15 +52,15 @@ void	fork_down(t_data *data, int id)
 	if (id % 2 == 0)
 	{
 		data->forks[(id - 1)] = '1';
-		data->forks[id % data->philo_num] = '1';
 		pthread_mutex_unlock(&data->fork_mutexes[id - 1]);
+		data->forks[id % data->philo_num] = '1';
 		pthread_mutex_unlock(&data->fork_mutexes[id % data->philo_num]);
 	}
 	else
 	{
 		data->forks[id % data->philo_num] = '1';
-		data->forks[(id - 1)] = '1';
 		pthread_mutex_unlock(&data->fork_mutexes[id % data->philo_num]);
+		data->forks[(id - 1)] = '1';
 		pthread_mutex_unlock(&data->fork_mutexes[id - 1]);
 	}
 }

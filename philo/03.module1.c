@@ -7,9 +7,21 @@ void	ft_sleep(long long time, int last)
 		if (get_time() - time >= last * 1000)
 			break ;
 		else
-			usleep(1);
+			usleep(100);
 	}
 
+}
+
+void	update_start(t_data *data)
+{
+	int	i;
+
+	i = 0;
+	while (i < data->philo_num)
+	{
+		data->start_eat_time[i] = data->start_time;
+		i++;
+	}
 }
 
 void	*philo(void *arg)
@@ -21,10 +33,34 @@ void	*philo(void *arg)
 	pthread_mutex_lock(&data->id_mutex);
 	id = ++data->id;
 	pthread_mutex_unlock(&data->id_mutex);
-	if (id % 2 == 0)
-		usleep((data->eating_time) * 100);
+	if (id == data->philo_num)
+	{
+		pthread_mutex_lock(&data->time_mutex);
+		((t_data *)arg)->start_time = get_time();
+		pthread_mutex_unlock(&data->time_mutex);
+		((t_data *)arg)->is_ready = 1;
+		pthread_mutex_unlock(&data->start_mutex);
+	}
+
 	while (1)
 	{
+		if (data->is_ready)
+		{
+			pthread_mutex_lock(&data->time_mutex);
+			data->start_eat_time[id - 1] = data->start_time;
+			pthread_mutex_unlock(&data->time_mutex);
+			break ;
+		}
+		else
+			usleep(1);
+	}
+	printf("asdfasdf\n");
+	if (id % 2 == 0)
+		usleep((data->eating_time) * 500);
+	while (1)
+	{
+		printf("%lld\n", data->start_eat_time[id -1]);
+		break ;
 		fork_up(data, id);
 		eating(data, id);
 		fork_down(data, id);
@@ -49,10 +85,10 @@ void	make_philos(t_data *data, pthread_t **threads)
 		i++;
 	}
 	i = 0;
-	data->start_time = get_time();
+	pthread_mutex_lock(&data->start_mutex);
 	while (i < data->philo_num)
 	{
-		data->start_eat_time[i] = data->start_time;
+		// data->start_eat_time[i] = data->start_time;
 		if (pthread_create(*threads + i, NULL, philo, data) != 0)
 			return ;
 		i++;
@@ -77,6 +113,8 @@ void	monitor_philos(t_data *data, int i)
 			pthread_mutex_unlock(&data->full_mutex);
 			pthread_mutex_lock(&data->time_mutex);
 			now = get_time();
+			printf("\033[0;31m%lld %d died\n", (data->start_time) / 1000, i + 1);
+			return ;
 			if (now - data->start_eat_time[i] >= data->time_to_die * 1000)
 			{
 				pthread_mutex_lock(&data->over_mutex);

@@ -22,6 +22,7 @@ enum e_log {
 typedef struct s_data
 {
 	char				is_died;
+	char				is_ready;
 	int					id;
 	int					time_to_die;
 	int					eating_time;
@@ -38,6 +39,7 @@ typedef struct s_data
 	pthread_mutex_t		over_mutex;
 	pthread_mutex_t		full_mutex;
 	pthread_mutex_t		time_mutex;
+	pthread_mutex_t		start_mutex;
 }	t_data;
 
 //parse
