@@ -21,10 +21,9 @@ void	eating(t_data *data)
 {
 	struct timeval	tv;
 
-	gettimeofday(&tv, NULL);
-	data->start_eat_time = tv.tv_sec * 1000 + tv.tv_usec / 1000;
+	data->start_eat_time = get_time();
 	print_log(data, EATING);
-	usleep(data->eating_time * 1000);
+	usleep(data->eating_time);
 }
 
 void	fork_down(t_data *data)

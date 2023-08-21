@@ -9,15 +9,15 @@ void	*monitor(void	*arg)
 	data = (t_data*)arg;
 	while (1)
 	{
-		usleep(50);
 		gettimeofday(&tv, NULL);
-		now = tv.tv_sec * 1000 + tv.tv_usec / 1000;
+		now = get_time();
 		if (now - data->start_eat_time >= data->time_to_die)
 		{
 			sem_wait(data->sem_print);
 			printf("%lld %d died\n", (now - data->start_time), data->id + 1);
 			exit(0);
 		}
+		usleep(100);
 	}
 }
 
@@ -30,7 +30,7 @@ void	life(t_data *data)
 	if (pthread_detach(full_monitor) != 0)
 		on_error(MUTEX);
 	if (data->id % 2 == 1)
-		usleep(data->eating_time * 500);
+		usleep(data->eating_time * 1000 / 2);
 	while (1)
 	{
 		fork_up(data);
@@ -67,8 +67,7 @@ void	print_log(t_data *data, int LOG_MSG)
 	long long		now;
 
 	sem_wait(data->sem_print);
-	gettimeofday(&tv, NULL);
-	now = (tv.tv_sec * 1000 + tv.tv_usec / 1000) - data->start_time;
+	now = get_time() - data->start_time;
 	if (LOG_MSG == FORK)
 		printf("%lld %d has taken a fork\n", now, data->id + 1);
 	else if (LOG_MSG == EATING)

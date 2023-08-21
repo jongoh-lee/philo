@@ -25,9 +25,8 @@ int	init(t_data *data, char **av, int ac)
 		data->eat_end = -1;
 	data->eat_count = 0;
 	init_sema(data);
-	gettimeofday(&tv, NULL);
-	data->start_time = (tv.tv_sec * 1000 + tv.tv_usec / 1000);
-	data->start_eat_time = (tv.tv_sec * 1000 + tv.tv_usec / 1000);
+	data->start_time = get_time();
+	data->start_eat_time = get_time();
 	data->childs = malloc(sizeof(pid_t) * data->philo_num);
 	if (!data->childs)
 		on_error(MALLOC);
