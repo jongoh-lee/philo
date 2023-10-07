@@ -1,5 +1,5 @@
 CC = cc
-CFLAGS = -Wall -Werror -Wextra -I$(HEADER) -fsanitize=thread -g3
+CFLAGS = -Wall -Werror -Wextra -I$(HEADER)
 NAME = philo
 
 SRC_FILES = 00.main.c \

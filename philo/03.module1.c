@@ -7,7 +7,7 @@ void	ft_sleep(long long time, int last)
 		if (get_time() - time >= last * 1000)
 			break ;
 		else
-			usleep(1);
+			usleep(10);
 	}
 
 }
@@ -21,8 +21,12 @@ void	*philo(void *arg)
 	pthread_mutex_lock(&data->id_mutex);
 	id = ++data->id;
 	pthread_mutex_unlock(&data->id_mutex);
+	if (id == data->philo_num)
+		pthread_mutex_unlock(&data->over_mutex);
+	pthread_mutex_lock(&data->over_mutex);
+	pthread_mutex_unlock(&data->over_mutex);
 	if (id % 2 == 0)
-		usleep((data->eating_time) * 100);
+		usleep((data->eating_time) * 1000);
 	while (1)
 	{
 		fork_up(data, id);
@@ -50,6 +54,7 @@ void	make_philos(t_data *data, pthread_t **threads)
 	}
 	i = 0;
 	data->start_time = get_time();
+	pthread_mutex_lock(&data->over_mutex);
 	while (i < data->philo_num)
 	{
 		data->start_eat_time[i] = data->start_time;
@@ -86,7 +91,7 @@ void	monitor_philos(t_data *data, int i)
 			pthread_mutex_unlock(&data->time_mutex);
 			i++;
 		}
-		usleep(100);
+		usleep(10);
 	}
 }
 

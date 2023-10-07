@@ -79,7 +79,7 @@ int	main(int ac, char **av)
 	make_philos(&data, &threads);
 	detach_philos(&threads, data.philo_num);
 	monitor_philos(&data, 0);
-	sleep(1);
+	usleep((data.eating_time + data.sleeping_time) * 1000);
 	mutex_destroy(&data);
 	free_data(&data, &threads);
 	return (0);
