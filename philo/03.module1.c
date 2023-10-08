@@ -6,7 +6,7 @@
 /*   By: jongohlee <jongohlee@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/08 18:47:30 by jongohlee         #+#    #+#             */
-/*   Updated: 2023/10/08 18:50:53 by jongohlee        ###   ########.fr       */
+/*   Updated: 2023/10/08 19:25:40 by jongohlee        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,7 @@ void	ft_sleep(long long time, int last)
 	{
 		if (get_time() - time > last * 1000)
 			break ;
-		else
-			usleep(900);
+		usleep(400);
 	}
 }
 

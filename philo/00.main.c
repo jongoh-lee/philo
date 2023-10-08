@@ -6,7 +6,7 @@
 /*   By: jongohlee <jongohlee@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/08 18:37:26 by jongohlee         #+#    #+#             */
-/*   Updated: 2023/10/08 18:49:15 by jongohlee        ###   ########.fr       */
+/*   Updated: 2023/10/08 19:21:24 by jongohlee        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,18 +56,11 @@ void	detach_philos(pthread_t **threads, int philos)
 
 void	free_data(t_data *data, pthread_t **threads)
 {
-	int	i;
-
-	i = 0;
 	free(data->start_eat_time);
 	free(data->forks);
 	free(data->eat_count);
 	free(*threads);
-	while (i < data->philo_num)
-	{
-		free(data->fork_mutexes + i);
-		i++;
-	}
+	free(data->fork_mutexes);
 }
 
 void	mutex_destroy(t_data *data)
