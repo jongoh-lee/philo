@@ -28,24 +28,27 @@ typedef struct s_data
 	int			id;
 	//인자 5개
 	int			philo_num;
-	int			time_to_die;
+	int			life_time;
 	int			eating_time;
 	int			sleeping_time;
 	//배부른 횟수
-	int			eat_end;
+	int			max_eat_num;
 	int			eat_count;
+	//철학자를 만들기 시작한 시간
+	long long	init;
 	//시작 시간 > 시간 경과 출력용
 	long long	start_time;
 	//처음 먹은 시간
-	long long	start_eat_time;
+	long long	eat_start_time;
 	//죽으면 종료되는거 감지, sema 0짜리
 	pid_t		*childs;
 	//print lock, sema 1짜리
 	sem_t		*sem_print;
 	//포크 가져갈 떄 wait, 다 먹고 post
+	sem_t		*sem_ready;
 	sem_t		*sem_forks;
-	//다 먹으면 종료, wait 50번
-	sem_t		*sem_all_eat;
+	//다 먹으면 종료, 철학자 수 만큼
+	sem_t		*sem_eat_end;
 	//자다 죽는거 감시
 }	t_data;
 
@@ -69,4 +72,6 @@ void	eating(t_data *data);
 void	fork_down(t_data *data);
 void	print_log(t_data *data, int LOG_MSG);
 void	sema_waiter(t_data *data);
+long long get_time();
+void	ft_usleep(long long start, int last);
 #endif
