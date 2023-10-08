@@ -1,5 +1,5 @@
 CC = cc
-CFLAGS = -Wall -Werror -Wextra -I$(HEADER)
+CFLAGS = -Wall -Werror -Wextra -I$(HEADER) 
 NAME = philo
 
 SRC_FILES = 00.main.c \

@@ -1,9 +1,21 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   04.module2.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: jongohlee <jongohlee@student.42.fr>        +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/10/08 18:46:35 by jongohlee         #+#    #+#             */
+/*   Updated: 2023/10/08 18:46:50 by jongohlee        ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "./main.h"
 
-long long	get_time()
+long long	get_time(void)
 {
-	struct timeval tv;
-	long long now;
+	struct timeval	tv;
+	long long		now;
 
 	gettimeofday(&tv, NULL);
 	now = tv.tv_sec * 1000000 + tv.tv_usec;

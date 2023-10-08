@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   00.main.c                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: jongohlee <jongohlee@student.42.fr>        +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/10/08 18:37:26 by jongohlee         #+#    #+#             */
+/*   Updated: 2023/10/08 18:49:15 by jongohlee        ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "./main.h"
 
 int	init(t_data *data, pthread_t **threads, char **av, int ac)
@@ -16,6 +28,7 @@ int	init(t_data *data, pthread_t **threads, char **av, int ac)
 	pthread_mutex_init(&data->over_mutex, NULL);
 	pthread_mutex_init(&data->full_mutex, NULL);
 	pthread_mutex_init(&data->time_mutex, NULL);
+	pthread_mutex_init(&data->ready_mutex, NULL);
 	data->full_philo = 0;
 	data->start_eat_time = malloc(sizeof(long long) * data->philo_num);
 	data->forks = malloc(sizeof(char) * data->philo_num);
@@ -43,9 +56,18 @@ void	detach_philos(pthread_t **threads, int philos)
 
 void	free_data(t_data *data, pthread_t **threads)
 {
+	int	i;
+
+	i = 0;
 	free(data->start_eat_time);
 	free(data->forks);
+	free(data->eat_count);
 	free(*threads);
+	while (i < data->philo_num)
+	{
+		free(data->fork_mutexes + i);
+		i++;
+	}
 }
 
 void	mutex_destroy(t_data *data)
@@ -57,6 +79,7 @@ void	mutex_destroy(t_data *data)
 	pthread_mutex_destroy(&data->over_mutex);
 	pthread_mutex_destroy(&data->full_mutex);
 	pthread_mutex_destroy(&data->time_mutex);
+	pthread_mutex_destroy(&data->ready_mutex);
 	while (i < data->philo_num)
 	{
 		pthread_mutex_destroy(&data->fork_mutexes[i]);
@@ -66,7 +89,6 @@ void	mutex_destroy(t_data *data)
 
 int	main(int ac, char **av)
 {
-	// atexit(hi);
 	pthread_t	*threads;
 	t_data		data;
 
@@ -78,7 +100,7 @@ int	main(int ac, char **av)
 		return (0);
 	make_philos(&data, &threads);
 	detach_philos(&threads, data.philo_num);
-	monitor_philos(&data, 0);
+	monitor_philos(&data, 0, 0);
 	usleep((data.eating_time + data.sleeping_time) * 1000);
 	mutex_destroy(&data);
 	free_data(&data, &threads);
